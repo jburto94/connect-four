@@ -28,6 +28,10 @@ class Board
     (0..5).none? { |row| grid[row][column] == empty_piece }
   end
 
+  def board_full?
+    (0..6).all? { |column| column_full?(column) }
+  end
+
   def display_board
     grid.each do |row|
       print "| "

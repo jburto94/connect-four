@@ -75,4 +75,22 @@ describe Board do
       expect(result).to be true
     end
   end
+
+  describe "#board_full?" do
+    subject(:board) { described_class.new }
+
+    it "should return true when every slot is filled with a colored piece" do
+      (0..6).each do |column|
+        6.times { |piece| board.update_board(column, red_piece) }
+      end
+
+      result = board.board_full?
+      expect(result).to be true
+    end
+
+    it "should return false when there are empty pieces" do
+      result = board.board_full?
+      expect(result).to be false
+    end
+  end        
 end
