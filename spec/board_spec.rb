@@ -58,4 +58,21 @@ describe Board do
       expect(invalid_update).to be false
     end
   end
+
+  describe "#column_full?" do
+    subject(:new_board) { described_class.new }
+
+    it "should return false when column is not full" do
+      first_column = 0
+      result = new_board.column_full?(first_column)
+      expect(result).to be false
+    end
+
+    it "should return true when column is full" do
+      first_column = 0
+      6.times { new_board.update_board(first_column, blue_piece) }
+      result = new_board.column_full?(first_column)
+      expect(result).to be true
+    end
+  end
 end
