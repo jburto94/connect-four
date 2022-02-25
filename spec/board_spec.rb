@@ -13,7 +13,7 @@ describe Board do
       expect(rows).to eq(6)
     end
 
-    it "has rows with 7 columns each" do
+    it "grid has rows with 7 columns each" do
       first_row_columns = new_board.grid[0].length
       expect(first_row_columns).to eq(7)
     end
