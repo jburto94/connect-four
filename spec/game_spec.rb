@@ -124,6 +124,37 @@ describe Game do
   end
 
   describe "#left_diagonal_win?" do
+    subject(:left_diagonal_board) { described_class.new }
+
+    it "should return false when there is no streak of 4 consectutive left diagonal same-colored pieces" do
+      left_diagonal_board.board.update_board(1, game.board.red_piece)
+      left_diagonal_board.board.update_board(2, game.board.red_piece)
+      left_diagonal_board.board.update_board(2, game.board.red_piece)
+      left_diagonal_board.board.update_board(3, game.board.red_piece)
+      left_diagonal_board.board.update_board(3, game.board.red_piece)
+      left_diagonal_board.board.update_board(3, game.board.red_piece)
+      left_diagonal_board.board.update_board(4, game.board.red_piece)
+      left_diagonal_board.board.update_board(4, game.board.red_piece)
+      left_diagonal_board.board.update_board(4, game.board.red_piece)
+      left_diagonal_board.board.update_board(4, game.board.blue_piece)
+      result = left_diagonal_board.left_diagonal_win?
+      expect(result).to be false
+    end
+
+    it "returns true when there are 4 consecutive left diagonal same-colored pieces" do
+      left_diagonal_board.board.update_board(1, game.board.red_piece)
+      left_diagonal_board.board.update_board(2, game.board.blue_piece)
+      left_diagonal_board.board.update_board(2, game.board.red_piece)
+      left_diagonal_board.board.update_board(3, game.board.blue_piece)
+      left_diagonal_board.board.update_board(3, game.board.blue_piece)
+      left_diagonal_board.board.update_board(3, game.board.red_piece)
+      left_diagonal_board.board.update_board(4, game.board.blue_piece)
+      left_diagonal_board.board.update_board(4, game.board.blue_piece)
+      left_diagonal_board.board.update_board(4, game.board.blue_piece)
+      left_diagonal_board.board.update_board(4, game.board.red_piece)
+      result = left_diagonal_board.left_diagonal_win?
+      expect(result).to be true
+    end
 
   end
 
