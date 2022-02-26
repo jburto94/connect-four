@@ -32,9 +32,19 @@ class Game
   end
 
   def get_turn
+    turn = ''
+    until valid_turn?(turn) do
+      puts "Select column: "
+      turn = gets.chomp
+    end
+    turn.to_i - 1
   end
 
-  def valid_turn?
+  def valid_turn?(turn)
+    return false unless ("1".."7").to_a.include?(turn)
+    turn = turn.to_i - 1
+    return false if board.column_full?(turn)
+    return true
   end
 
   def play
