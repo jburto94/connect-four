@@ -1,6 +1,6 @@
 module Piece
   def blue_piece
-    "\e[m34\u25cf\e[0m"
+    "\e[34m\u25cf\e[0m"
   end
 
   def red_piece
