@@ -101,6 +101,25 @@ describe Game do
   end
 
   describe "#horizontal_win?" do
+    subject(:horizontal_board) { described_class.new }
+
+    it "should return false when there is no streak of 4 consectutive horizontal same-colored pieces" do
+      horizontal_board.board.update_board(1, game.board.red_piece)
+      horizontal_board.board.update_board(2, game.board.red_piece)
+      horizontal_board.board.update_board(3, game.board.red_piece)
+      horizontal_board.board.update_board(4, game.board.blue_piece)
+      result = horizontal_board.horizontal_win?
+      expect(result).to be false
+    end
+
+    it "returns true when there are 4 consecutive horizontal same-colored pieces" do
+      horizontal_board.board.update_board(1, game.board.red_piece)
+      horizontal_board.board.update_board(2, game.board.red_piece)
+      horizontal_board.board.update_board(3, game.board.red_piece)
+      horizontal_board.board.update_board(4, game.board.red_piece)
+      result = horizontal_board.horizontal_win?
+      expect(result).to be true
+    end
 
   end
 

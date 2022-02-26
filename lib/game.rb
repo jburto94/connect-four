@@ -92,6 +92,26 @@ class Game
   end
 
   def horizontal_win?
+    streak = 0
+    piece = board.blue_piece
+
+    (5).downto(0) do |row|
+      (0..6).each do |column|  
+        slot = board.grid[row][column]
+        if slot == piece
+          streak += 1
+        elsif slot == board.empty_piece
+          streak = 0
+          piece = nil
+        else
+          streak = 1
+          piece = slot
+        end
+        return true if streak >= 4
+      end
+    end
+
+    return false
   end
   
   def left_diagonal_win?
