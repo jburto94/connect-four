@@ -77,4 +77,38 @@ describe Game do
       expect(next_player_name).to eql(player2_name)
     end
   end
+
+  describe "#vertical_win?" do
+    subject(:vertical_board) { described_class.new }
+
+    it "should return false when there is no streak of 4 consectutive vertical same-colored pieces" do
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.blue_piece)
+      result = vertical_board.vertical_win?
+      expect(result).to be false
+    end
+
+    it "returns true when there are 4 consecutive vertical same-colored pieces" do
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.red_piece)
+      vertical_board.board.update_board(2, game.board.red_piece)
+      result = vertical_board.vertical_win?
+      expect(result).to be true
+    end
+  end
+
+  describe "#horizontal_win?" do
+
+  end
+
+  describe "#left_diagonal_win?" do
+
+  end
+
+  describe "#right_diagonal_win?" do
+
+  end
 end
