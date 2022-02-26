@@ -56,4 +56,25 @@ describe Game do
       expect(result).to be false
     end
   end
+
+  describe "#get_piece" do
+    subject(:red_game) { described_class.new }
+    
+    it "returns the current players correct colored piece" do
+      red_piece = game.board.red_piece
+      result = game.get_piece
+      expect(result).to eql(red_piece)
+    end
+  end
+
+  describe "#switch_turn" do
+    subject(:player2_game) { described_class.new }
+
+    it "should switch the current player to the other player" do
+      player2_name = player2_game.players[1].name
+      player2_game.switch_turn
+      next_player_name = player2_game.current_player.name
+      expect(next_player_name).to eql(player2_name)
+    end
+  end
 end
