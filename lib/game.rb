@@ -2,19 +2,45 @@ require_relative 'player'
 require_relative 'board'
 
 class Game
-  def initialize
+  attr_reader :board, :players
+  attr_accessor :current_player
+
+  def initialize()
+    @board = Board.new
+    @players = [
+     Player.new('player1', 'red'),
+     Player.new('player2', 'blue')
+    ]
+    @current_player = players[0]
   end
 
-  def get_name
+  def get_names
+    players.each { |player| player.name = prompt_name(player.name) }
   end
 
-  def valid_name
+  def prompt_name(player)
+    name = ''
+    until valid_name?(name) do
+      puts "#{player} enter your name: "
+      name = gets.chomp
+    end
+    name
+  end
+
+  def valid_name?(name)
+    name.length.between?(1, 25)
   end
 
   def get_turn
   end
 
   def valid_turn?
+  end
+
+  def play
+  end
+
+  def switch_turn
   end
 
   def win?
@@ -33,9 +59,6 @@ class Game
   end
 
   def game_over?
-  end
-
-  def play
   end
 
   def display_winner

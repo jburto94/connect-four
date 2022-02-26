@@ -1,8 +1,11 @@
 require_relative 'piece'
 
 class Player
-  def initialize(name, color)
-    name = @name
-    @color = Player.new(color)
+  attr_accessor :name
+  attr_reader :color
+  
+  def initialize(name=nil, color)
+    @name = name
+    @color = color
   end
 end
