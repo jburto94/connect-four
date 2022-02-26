@@ -130,6 +130,18 @@ class Game
   end
 
   def right_diagonal_win?
+    (6).downto(3) do |c|
+      (5).downto(3) do |r|
+        slot = board.grid[r][c]
+        streak2 = board.grid[r - 1][c - 1]
+        streak3 = board.grid[r - 2][c - 2]
+        streak4 = board.grid[r - 3][c - 3]
+        streak = [slot, streak2, streak3, streak4]
+        break if streak.any? { |piece| piece == board.empty_piece }
+        return true if streak.all?(slot)
+      end
+    end
+    return false
   end
 
   def game_over?

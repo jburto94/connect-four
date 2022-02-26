@@ -155,10 +155,39 @@ describe Game do
       result = left_diagonal_board.left_diagonal_win?
       expect(result).to be true
     end
-
   end
 
   describe "#right_diagonal_win?" do
+    subject(:right_diagonal_board) { described_class.new }
 
+    it "should return false when there is no streak of 4 consectutive right diagonal same-colored pieces" do
+      right_diagonal_board.board.update_board(6, game.board.red_piece)
+      right_diagonal_board.board.update_board(5, game.board.red_piece)
+      right_diagonal_board.board.update_board(5, game.board.red_piece)
+      right_diagonal_board.board.update_board(4, game.board.red_piece)
+      right_diagonal_board.board.update_board(4, game.board.red_piece)
+      right_diagonal_board.board.update_board(4, game.board.red_piece)
+      right_diagonal_board.board.update_board(3, game.board.red_piece)
+      right_diagonal_board.board.update_board(3, game.board.red_piece)
+      right_diagonal_board.board.update_board(3, game.board.red_piece)
+      right_diagonal_board.board.update_board(3, game.board.blue_piece)
+      result = right_diagonal_board.right_diagonal_win?
+      expect(result).to be false
+    end
+
+    it "returns true when there are 4 consecutive right diagonal same-colored pieces" do
+      right_diagonal_board.board.update_board(6, game.board.red_piece)
+      right_diagonal_board.board.update_board(5, game.board.blue_piece)
+      right_diagonal_board.board.update_board(5, game.board.red_piece)
+      right_diagonal_board.board.update_board(4, game.board.blue_piece)
+      right_diagonal_board.board.update_board(4, game.board.blue_piece)
+      right_diagonal_board.board.update_board(4, game.board.red_piece)
+      right_diagonal_board.board.update_board(3, game.board.blue_piece)
+      right_diagonal_board.board.update_board(3, game.board.blue_piece)
+      right_diagonal_board.board.update_board(3, game.board.blue_piece)
+      right_diagonal_board.board.update_board(3, game.board.red_piece)
+      result = right_diagonal_board.right_diagonal_win?
+      expect(result).to be true
+    end
   end
 end
