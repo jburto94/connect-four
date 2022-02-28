@@ -3,7 +3,7 @@ require_relative 'board'
 
 class Game
   attr_reader :board, :players
-  attr_accessor :current_player
+  attr_accessor :current_player, :win_way
 
   def initialize()
     @board = Board.new
@@ -12,6 +12,7 @@ class Game
      Player.new('player2', 'blue')
     ]
     @current_player = players[0]
+    @win_way = nil
   end
 
   def get_names
@@ -48,6 +49,8 @@ class Game
   end
 
   def play
+    get_names
+
     until game_over?
       board.display_board
       piece = get_piece
@@ -73,19 +76,24 @@ class Game
 
   def vertical_win?
     streak = 0
-    piece = board.blue_piece
+    piece = nil
+
     (0..6).each do |column|
       (5).downto(0) do |row|
         slot = board.grid[row][column]
-        break if slot == board.empty_piece
-        if slot == piece
+        if slot == board.empty_piece
+          streak = 0
+          break
+        elsif slot == piece
           streak += 1
         else
           streak = 1
           piece = slot
         end
-        return true if streak >= 4
+        return true if streak == 4
       end
+
+      steak = 0
     end
 
     return false
@@ -93,7 +101,7 @@ class Game
 
   def horizontal_win?
     streak = 0
-    piece = board.blue_piece
+    piece = nil
 
     (5).downto(0) do |row|
       (0..6).each do |column|  
@@ -107,8 +115,10 @@ class Game
           streak = 1
           piece = slot
         end
-        return true if streak >= 4
+        return true if streak == 4
       end
+      
+      streak = 0
     end
 
     return false
@@ -152,5 +162,5 @@ class Game
     switch_turn
     board.display_board
     puts "Congratulations #{current_player.name}! You have won the game!"
-  end
+  end 
 end
